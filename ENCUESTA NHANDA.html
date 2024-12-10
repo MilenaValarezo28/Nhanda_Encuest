@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta Temporizada</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .timer {
+            font-size: 1.5em;
+            color: red;
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+        let timeRemaining = 20 * 60; // 20 minutes in seconds
+
+        function startTimer() {
+            const timerElement = document.getElementById('timer');
+
+            const interval = setInterval(() => {
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                timerElement.textContent = `${minutes} minutos ${seconds < 10 ? '0' : ''}${seconds} segundos`;
+
+                if (timeRemaining <= 0) {
+                    clearInterval(interval);
+                    alert('El tiempo se ha agotado. Las respuestas serán enviadas automáticamente.');
+                    document.getElementById('survey-form').submit();
+                }
+
+                timeRemaining--;
+            }, 1000);
+        }
+
+        window.onload = startTimer;
+    </script>
+</head>
+<body>
+    <h1>Encuesta Temporizada</h1>
+    <div class="timer" id="timer"></div>
+    <form id="survey-form" action="/submit" method="POST">
+        <div class="question">
+            <label for="q1">1. ¿Cuál es tu color favorito?</label><br>
+            <input type="radio" name="q1" value="Rojo"> Rojo<br>
+            <input type="radio" name="q1" value="Azul"> Azul<br>
+            <input type="radio" name="q1" value="Verde"> Verde<br>
+        </div>
+        <div class="question">
+            <label for="q2">2. ¿Qué tipo de música prefieres?</label><br>
+            <input type="radio" name="q2" value="Pop"> Pop<br>
+            <input type="radio" name="q2" value="Rock"> Rock<br>
+            <input type="radio" name="q2" value="Clásica"> Clásica<br>
+        </div>
+        <div class="question">
+            <label for="q3">3. ¿Qué deporte practicas?</label><br>
+            <input type="radio" name="q3" value="Fútbol"> Fútbol<br>
+            <input type="radio" name="q3" value="Baloncesto"> Baloncesto<br>
+            <input type="radio" name="q3" value="Ninguno"> Ninguno<br>
+        </div>
+        <div class="question">
+            <label for="q4">4. ¿Qué tipo de comida prefieres?</label><br>
+            <input type="radio" name="q4" value="Italiana"> Italiana<br>
+            <input type="radio" name="q4" value="Mexicana"> Mexicana<br>
+            <input type="radio" name="q4" value="Japonesa"> Japonesa<br>
+        </div>
+        <div class="question">
+            <label for="q5">5. ¿Cuál es tu estación del año favorita?</label><br>
+            <input type="radio" name="q5" value="Primavera"> Primavera<br>
+            <input type="radio" name="q5" value="Verano"> Verano<br>
+            <input type="radio" name="q5" value="Invierno"> Invierno<br>
+        </div>
+        <div class="question">
+            <label for="q6">6. ¿Prefieres leer libros o ver películas?</label><br>
+            <input type="radio" name="q6" value="Leer libros"> Leer libros<br>
+            <input type="radio" name="q6" value="Ver películas"> Ver películas<br>
+        </div>
+        <div class="question">
+            <label for="q7">7. ¿Qué medio de transporte utilizas más?</label><br>
+            <input type="radio" name="q7" value="Coche"> Coche<br>
+            <input type="radio" name="q7" value="Bicicleta"> Bicicleta<br>
+            <input type="radio" name="q7" value="Transporte público"> Transporte público<br>
+        </div>
+        <div class="question">
+            <label for="q8">8. ¿Qué tipo de clima prefieres?</label><br>
+            <input type="radio" name="q8" value="Frío"> Frío<br>
+            <input type="radio" name="q8" value="Calor"> Calor<br>
+            <input type="radio" name="q8" value="Templado"> Templado<br>
+        </div>
+        <div class="question">
+            <label for="q9">9. ¿Qué género de películas prefieres?</label><br>
+            <input type="radio" name="q9" value="Acción"> Acción<br>
+            <input type="radio" name="q9" value="Comedia"> Comedia<br>
+            <input type="radio" name="q9" value="Drama"> Drama<br>
+        </div>
+        <div class="question">
+            <label for="q10">10. ¿Te gusta viajar?</label><br>
+            <input type="radio" name="q10" value="Sí"> Sí<br>
+            <input type="radio" name="q10" value="No"> No<br>
+
+        <button type="submit">Enviar Respuestas</button>
+    </form>
+</body>
+</html>
